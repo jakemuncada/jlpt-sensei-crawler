@@ -24,7 +24,7 @@ class JlptSenseiGrammarCrawler:
 
         self.level = level
         self.grammarList = []
-        self.directory = os.path.join(directory, 'grammar', f'N{level}')
+        self.directory = directory
         self.killEvent = threading.Event()
 
     def download(self):
@@ -145,7 +145,7 @@ class JlptSenseiGrammarCrawler:
         grammarList = [item.toDict() for item in self.grammarList]
 
         os.makedirs(self.directory, exist_ok=True)
-        filePath = os.path.join(self.directory, 'grammar.json')
+        filePath = os.path.join(self.directory, f'grammar-n{self.level}.json')
 
         with open(filePath, 'w', encoding='utf-8') as outputFile:
             jsonStr = json.dumps(grammarList, indent=4)
